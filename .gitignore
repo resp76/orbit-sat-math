@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+sat-app/ios/
+sat-app/android/
+test-results/
+playwright-report/

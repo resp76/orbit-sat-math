@@ -1,0 +1,13 @@
+{
+  "name": "Orbit SAT Math Coach",
+  "short_name": "Orbit Math",
+  "description": "Adaptive SAT Math practice, mistake review, and progress tracking.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f4ee",
+  "theme_color": "#14213d",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

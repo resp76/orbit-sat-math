@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#14213d">
+  <meta name="description" content="Orbit SAT Math is an adaptive, private study coach designed to help learners grow from a 540 toward a 680.">
+  <title>Orbit SAT Math</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to study content</a>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" type="button" data-route="home" aria-label="Orbit SAT Math home">
+        <span class="brand-orbit" aria-hidden="true"><i></i></span>
+        <span><strong>Orbit</strong><small>SAT Math</small></span>
+      </button>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <button class="nav-button active" type="button" data-route="home">Today</button>
+        <button class="nav-button" type="button" data-route="practice">Practice</button>
+        <button class="nav-button" type="button" data-route="review">Review</button>
+        <button class="nav-button" type="button" data-route="progress">Progress</button>
+      </nav>
+
+      <button class="profile-button" id="profile-button" type="button" aria-label="Open learner settings" aria-expanded="false" aria-controls="profile-panel">
+        <span id="profile-initial">S</span>
+      </button>
+    </header>
+
+    <aside class="profile-panel" id="profile-panel" hidden>
+      <div class="panel-heading"><h2>Learner settings</h2><button class="close-button" type="button" data-close-profile aria-label="Close settings">×</button></div>
+      <label for="learner-name-setting">First name</label>
+      <input id="learner-name-setting" maxlength="24" autocomplete="given-name">
+      <label for="test-date-setting">SAT date</label>
+      <input id="test-date-setting" type="date">
+      <div class="setting-grid">
+        <label>Starting score<input id="start-score-setting" type="number" min="200" max="800" step="10"></label>
+        <label>Goal score<input id="goal-score-setting" type="number" min="200" max="800" step="10"></label>
+      </div>
+      <button class="primary-button full" type="button" id="save-settings">Save changes</button>
+      <button class="danger-link" type="button" id="reset-data">Erase all study data</button>
+      <p class="privacy-note">Progress is stored only on this device. Orbit does not collect or sell learner data.</p>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <section class="view active" id="view-home" aria-labelledby="home-title">
+        <div class="welcome-row">
+          <div>
+            <p class="eyebrow" id="today-label">Today’s plan</p>
+            <h1 id="home-title">Let’s build your next 140 points.</h1>
+            <p class="page-lede" id="home-lede">Short, focused practice based on what you need most.</p>
+          </div>
+          <div class="goal-chip" aria-label="SAT Math score goal"><span id="goal-current">540</span><i aria-hidden="true">→</i><strong id="goal-target">680</strong></div>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="mission-card">
+            <div class="mission-top">
+              <span class="eyebrow light">Recommended next</span>
+              <span class="time-pill">12 min</span>
+            </div>
+            <h2 id="mission-title">Find your starting point</h2>
+            <p id="mission-copy">Take an 8-question diagnostic so Orbit can build a study path around your strengths and gaps.</p>
+            <button class="white-button" type="button" id="mission-button">Start diagnostic <span aria-hidden="true">→</span></button>
+            <div class="mission-art" aria-hidden="true"><span>ƒ</span><i>x</i><b>+</b></div>
+          </article>
+
+          <article class="score-card">
+            <div class="card-heading"><div><span class="eyebrow">Estimated level</span><h2>Your trajectory</h2></div><span class="trend-badge" id="trend-badge">Baseline</span></div>
+            <div class="score-visual">
+              <div class="score-ring" id="score-ring"><span id="estimated-score">540</span><small>estimated</small></div>
+              <div class="score-copy"><strong id="points-to-go">140 points to go</strong><p id="score-message">Complete the diagnostic to calibrate your plan.</p></div>
+            </div>
+            <div class="score-track" aria-hidden="true"><i id="score-track-fill"></i></div>
+            <div class="track-labels"><span id="track-start">540 start</span><span id="track-goal">680 goal</span></div>
+          </article>
+        </div>
+
+        <section class="section-block" aria-labelledby="plan-title">
+          <div class="section-heading"><div><span class="eyebrow">Smart study path</span><h2 id="plan-title">Today’s focus</h2></div><button class="text-button" type="button" data-route="practice">All practice →</button></div>
+          <div class="focus-grid" id="focus-grid"></div>
+        </section>
+
+        <section class="streak-strip" aria-label="Weekly study activity">
+          <div><span class="streak-icon" aria-hidden="true">✦</span><p><strong id="streak-count">Start your streak</strong><small>Consistency beats cramming</small></p></div>
+          <div class="week-dots" id="week-dots"></div>
+          <p class="weekly-stat"><strong id="weekly-minutes">0</strong><small>minutes this week</small></p>
+        </section>
+      </section>
+
+      <section class="view" id="view-practice" aria-labelledby="practice-title">
+        <div class="page-heading">
+          <div><span class="eyebrow">Adaptive question lab</span><h1 id="practice-title">Practice with purpose.</h1><p class="page-lede">Orbit chooses questions from the skills that will move your score most.</p></div>
+          <button class="secondary-button" type="button" id="open-diagnostic">Retake diagnostic</button>
+        </div>
+
+        <div class="practice-layout">
+          <aside class="practice-controls" aria-label="Practice settings">
+            <h2>Build a session</h2>
+            <fieldset><legend>Question mix</legend>
+              <label class="radio-card"><input type="radio" name="practice-mode" value="adaptive" checked><span><strong>Smart mix</strong><small>Targets weaker skills</small></span></label>
+              <label class="radio-card"><input type="radio" name="practice-mode" value="mixed"><span><strong>Mixed review</strong><small>All four domains</small></span></label>
+              <label class="radio-card"><input type="radio" name="practice-mode" value="mistakes"><span><strong>Retry mistakes</strong><small>Questions you missed</small></span></label>
+            </fieldset>
+            <label for="domain-select">Focus domain</label>
+            <select id="domain-select"><option value="all">All domains</option><option value="algebra">Algebra</option><option value="advanced">Advanced Math</option><option value="data">Problem-Solving & Data</option><option value="geometry">Geometry & Trigonometry</option></select>
+            <label class="timer-toggle"><input type="checkbox" id="timer-toggle"><span><strong>Test-day timer</strong><small>About 95 seconds per question</small></span></label>
+            <button class="primary-button full" type="button" id="new-question">Start practice</button>
+          </aside>
+
+          <article class="question-card" id="question-card" aria-live="polite">
+            <div class="empty-practice">
+              <span class="empty-icon" aria-hidden="true">∑</span>
+              <h2>Ready when you are</h2>
+              <p>Choose a session style, then start with one question at a time.</p>
+              <button class="primary-button" type="button" data-start-practice>Start smart practice</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-review" aria-labelledby="review-title">
+        <div class="page-heading"><div><span class="eyebrow">Mistake journal</span><h1 id="review-title">Turn misses into points.</h1><p class="page-lede">Every incorrect answer becomes a short lesson you can retry.</p></div></div>
+        <div class="review-summary" id="review-summary"></div>
+        <div class="mistake-list" id="mistake-list"></div>
+      </section>
+
+      <section class="view" id="view-progress" aria-labelledby="progress-title">
+        <div class="page-heading"><div><span class="eyebrow">Learner + parent view</span><h1 id="progress-title">Progress you can understand.</h1><p class="page-lede">Watch accuracy, pacing, and mastery—not just time spent.</p></div><button class="secondary-button" type="button" id="print-progress">Print summary</button></div>
+        <div class="metrics-grid" id="metrics-grid"></div>
+        <section class="progress-panel"><div class="section-heading"><div><span class="eyebrow">Four test domains</span><h2>Skill mastery</h2></div></div><div class="domain-progress-list" id="domain-progress-list"></div></section>
+        <section class="progress-panel"><div class="section-heading"><div><span class="eyebrow">Recent work</span><h2>Study history</h2></div></div><div class="history-list" id="history-list"></div></section>
+        <aside class="checkpoint-card"><div><span class="eyebrow light">Official checkpoint</span><h2>Use Bluebook every two weeks</h2><p>Orbit is for daily coaching. Use an official, scored Bluebook practice test to measure the real score and update the starting score in settings.</p></div><a href="https://satsuite.collegeboard.org/practice/practice-tests/bluebook" target="_blank" rel="noopener noreferrer">Open College Board <span aria-hidden="true">↗</span></a></aside>
+      </section>
+    </main>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-nav-button active" type="button" data-route="home"><span aria-hidden="true">⌂</span>Today</button>
+      <button class="mobile-nav-button" type="button" data-route="practice"><span aria-hidden="true">✎</span>Practice</button>
+      <button class="mobile-nav-button" type="button" data-route="review"><span aria-hidden="true">↻</span>Review</button>
+      <button class="mobile-nav-button" type="button" data-route="progress"><span aria-hidden="true">⌁</span>Progress</button>
+    </nav>
+  </div>
+
+  <dialog class="onboarding" id="onboarding-dialog" aria-labelledby="onboarding-title">
+    <form method="dialog" id="onboarding-form">
+      <div class="onboarding-brand"><span class="brand-orbit" aria-hidden="true"><i></i></span><strong>Orbit</strong></div>
+      <div class="onboarding-step active" data-onboarding-step="1">
+        <span class="eyebrow">Your personal SAT Math coach</span>
+        <h1 id="onboarding-title">Let’s make 680 feel possible.</h1>
+        <p>We’ll build a private, focused plan from where you are now to where you want to go.</p>
+        <label for="learner-name">What should we call you?</label>
+        <input id="learner-name" name="learnerName" maxlength="24" placeholder="First name" autocomplete="given-name" required>
+        <button class="primary-button full" type="button" data-next-onboarding>Continue</button>
+      </div>
+      <div class="onboarding-step" data-onboarding-step="2">
+        <span class="eyebrow">Set the destination</span>
+        <h1>What are we working toward?</h1>
+        <div class="score-inputs"><label>Latest Math score<input id="starting-score" name="startingScore" type="number" value="540" min="200" max="800" step="10" required></label><span aria-hidden="true">→</span><label>Goal Math score<input id="target-score" name="targetScore" type="number" value="680" min="200" max="800" step="10" required></label></div>
+        <label for="test-date">When is the test? <small>Optional</small></label>
+        <input id="test-date" name="testDate" type="date">
+        <div class="onboarding-actions"><button class="text-button" type="button" data-prev-onboarding>Back</button><button class="primary-button" type="submit">Build my study plan</button></div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="diagnostic-dialog" id="diagnostic-dialog" aria-labelledby="diagnostic-title">
+    <div class="diagnostic-shell" id="diagnostic-content"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

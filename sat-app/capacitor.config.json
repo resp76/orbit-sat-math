@@ -1,0 +1,7 @@
+{
+  "appId": "com.sandboxdigitallabs.orbitsatmath",
+  "appName": "Orbit SAT Math",
+  "webDir": "../www/sat",
+  "ios": { "contentInset": "never" },
+  "server": { "androidScheme": "https" }
+}
